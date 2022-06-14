@@ -1,0 +1,72 @@
+# Zathura configuration file
+# See man `man zathurarc'
+
+# Open document in fit-width mode by default
+set adjust-open "zoom"
+
+# One page per row by default
+set pages-per-row 1
+
+#stop at page boundries
+set scroll-page-aware "true"
+set scroll-full-overlap 0.01
+set scroll-step 50
+
+#zoom settings
+set zoom-min 5
+set guioptions ""
+
+# zathurarc-dark
+
+set font "Inconsolata Nerd Font 11"
+set default-fg "#d8dee9" #00
+set default-bg "#2E3440" #01
+
+set statusbar-bg "#D8DEE9" #04
+set statusbar-fg "#2E3440" #01
+
+set inputbar-bg "#2E3440" #00 currently not used
+set inputbar-fg "#D8DEE9" #02
+
+set notification-error-fg "#BF616A" #08
+set notification-error-bg "#2E3440" #00
+
+set notification-warning-fg "#D8DEE9" #08
+set notification-warning-bg "#2E3440" #00
+
+set highlight-color "#4C566A" #0A
+set highlight-active-color "#88C0D0" #0D
+
+#set completion-highlight-fg "#2E3440" #02
+#set completion-highlight-bg "#A3BE8C" #0C
+set completion-highlight-fg "#d8dee9" #02
+set completion-highlight-bg "#4c566a" #0C
+
+set completion-bg "#2E3440" #02
+set completion-fg "#D8DEE9" #0C
+
+#set notification-bg "#A3BE8C" #0B
+#set notification-fg "#2E3440" #00
+set notification-bg "#2E3440" #0B
+set notification-fg "#d8dee9" #00
+
+#set recolor "true"
+#set recolor-lightcolor "#2E3440" #00
+#set recolor-darkcolor "#D8DEE9" #06
+#set recolor-reverse-video "true"
+#set recolor-keephue "true"
+
+set render-loading "true"
+set scroll-step 50
+
+set selection-clipboard clipboard
+
+unmap f
+map f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
+unmap =
+unmap +
+map = zoom in
+map 0 zoom
+
+map <C-c> feedkeys ":exec sh -c \"echo $FILE | xclip -i -sel clip\"<Return>"

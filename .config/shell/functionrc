@@ -1,0 +1,197 @@
+#!/bin/sh
+
+sound="/usr/share/sounds/deepin/stereo"
+
+bell="$sound/complete-copy.wav"
+complete="$sound/complete-print.wav"
+dialogerror="$sound/dialog-error-serious.wav"
+dialogwarning="$sound/dialog-error-critical.wav"
+message="$sound/message.wav"
+messagenewinstant="$sound/power-plug.wav"
+dialoginformation="$sound/power-unplug.wav"
+trashempty="$sound/trash-empty.wav"
+deviceadded="$sound/device-added.wav"
+servicelogout="$sound/desktop-logout.wav"
+
+mdp() { setsid grip -b --quiet "$@" &>/dev/null  }
+
+yc() {  
+    name="$(printf $1 | cut -d '/' -f 4)"
+    repo="$(printf $1 | cut -d '/' -f 5)"
+
+    mkdir $name; cd $name && git clone $1 && cd $repo
+}
+
+v() { ls -d ~/.config/*/* ~/.config/*/.* | dmenu -i -l 10 | xargs -I {} $EDITOR "{}" }
+
+vs() { 
+    file="$(ls -d /etc/portage/savedconfig/*/* | awk -F '/etc/portage/savedconfig/' '{print $2}' | grep -v '\.h$' | dmenu -i -l 10)"
+
+    { [ -z "$(ls /etc/portage/savedconfig/$file.h)" ] && printf $file | xargs -I {} doas $EDITOR /etc/portage/savedconfig/"{}"; } ||
+    { printf $file.h | xargs -I {} doas $EDITOR /etc/portage/savedconfig/"{}"; }
+}
+
+rm() { print "Use trash-cli instead." }
+ti() { time ("$@") }
+
+esl() { eselect "$@" list }
+ess() { doas eselect "$1" set "$2" && eselect "$1" list }
+ese() { doas eselect "$1" enable "$2" && eselect "$1" list }
+esd() { doas eselect "$1" disable "$2" && eselect "$1" list }
+
+esr() {
+    if [ -n "$2" ]; then
+	doas eselect repository add "$1" git "$2".git && eselect repository list -i ; doas emerge --sync "$1"
+    elif [ -n "$1" ]; then
+	doas eselect repository enable "$1" && eselect repository list -i ; doas emerge --sync "$1"
+    fi
+}
+
+esrd() { doas eselect repository disable "$@" && eselect repository list -i }
+esrr() { doas eselect repository remove -f "$@" && eselect repository list -i }
+
+f() { if [ -n "$1" ]; then
+	eix "$@"
+else
+	doas eix-update 
+fi }
+
+F() { if [ -n "$1" ]; then
+	eix -R "$@"
+else
+	doas eix-remote update
+fi }
+
+g() { if [ -n "$1" ]; then
+doas emerge "$@" && pl "$bell" || pl "$dialogerror"
+else
+doas emerge -uDN @world && pl "$message" || pl "$messagenewinstant"
+fi }
+
+ga() { if [ -n "$1" ]; then
+doas emerge -a "$@" && pl "$bell" || pl "$dialogerror"
+else
+doas emerge -auDN @world && pl "$message" || pl "$messagenewinstant"
+fi }
+
+gs() { if [ -n "$1" ]; then
+doas emerge --usepkg=n "$@" && pl "$bell" || pl "$dialogerror"
+else
+doas emerge --usepkg=n -auDN @world && pl "$message" || pl "$messagenewinstant"
+fi }
+
+gsa() { if [ -n "$1" ]; then
+doas emerge --usepkg=n -a "$@" && pl "$bell" || pl "$dialogerror"
+else
+doas emerge --usepkg=n -auDN @world && pl "$message" || pl "$messagenewinstant"
+fi }
+
+B() { if [ -n "$1" ]; then
+doas emerge -DU "$@" && pl "$bell" || pl "$dialogerror"
+else
+doas emerge -DU @world && pl "$message" || pl "$messagenewinstant"
+fi }
+
+k() { if [ -n "$1" ]; then
+doas genkernel --compress-initramfs --compress-initramfs-type=lz4 "$@"
+else
+doas genkernel --compress-initramfs --compress-initramfs-type=lz4 all && pl "$complete" || pl "$servicelogout"
+fi }
+
+km() { if [ -n "$1" ]; then
+genkernel --menuconfig "$@"
+else
+doas genkernel --menuconfig all && pl "$complete" || pl "$servicelogout"
+fi }
+
+c() { if [ -n "$1" ]; then
+eclean-kernel "$@"
+else
+doas eclean-kernel -a && pl "$trashempty" || pl "$dialoginformation"
+fi }
+
+ca() { if [ -n "$1" ]; then
+eclean-kernel -A "$@"
+else
+doas eclean-kernel -Aa && pl "$trashempty" || pl "$dialoginformation"
+fi }
+
+C() { if [ -n "$1" ]; then
+eclean "$@"
+else
+doas eclean-dist -d && doas eclean-pkg -d && pl "$trashempty" || pl "$dialoginformation"
+fi }
+
+Ca() { if [ -n "$1" ]; then eclean -i "$@"
+else
+doas eclean-dist -id && doas eclean-pkg -id && pl "$trashempty" || pl "$dialoginformation"
+fi }
+
+j() { doas emerge -c "$@" && pl "$trashempty" || pl "$dialoginformation" }
+ja() { doas emerge -ca "$@" && pl "$trashempty" || pl "$dialoginformation" }
+J() { doas emerge -C "$@" && pl "$trashempty" || pl "$dialoginformation" }
+Ja() { doas emerge -Ca "$@" && pl "$trashempty" || pl "$dialoginformation" }
+b() { doas emerge --sync "$@" && pl "$deviceadded" || pl "$dialogwarning" }
+ba() { doas emerge --sync -a "$@" && pl "$deviceadded" || pl "$dialogwarning" }
+
+
+de() { [ -n "$1" ] && trash-rm "$@" || trash-empty }
+sde() { [ -n "$1" ] && doas trash-rm "$@" || doas trash-empty }
+u() { [ -n "$1" ] && nsxiv -q "$@" || nsxiv -qt * }
+U() { [ -n "$1" ] && nsxiv -qf "$@" || nsxiv -qft * }
+wi() { [ -n "$1" ] && nmcli dev wifi connect -a "$@" && nmcli con show || nmcli dev wifi list }
+wir () { [ -n "$1" ] && nmcli radio wifi "$@" && nmcli radio wifi || nmcli radio wifi }
+#y() { g $(qsearch -aqC | fzf | cut -d ':' -f1) }
+#yR() { g $(eix -Rc | fzf | cut -d ' ' -f2) }
+#ys() { gs $(qsearch -aqC | fzf | cut -d ':' -f1) }
+#yr() { b $(eix -cI --pure-packages | fzf | cut -d ' ' -f2) }
+#yrs() { b $(eix -cI --selected --pure-packages | fzf | cut -d ' ' -f2) }
+hre() { h $(re "$@") }
+hch() { h $(ch "$@") }
+
+rmd() {
+    { [ -n "$3" ] && R -e 'rmarkdown::draft("'${1}.Rmd'", "'$2'", "'$3'")'; } ||
+    { [ -n "$2" ] && R -e 'rmarkdown::draft("'${1}.Rmd'", "'$2'", "amaryaml")'; } ||
+    { [ -n "$1" ] && R -e 'rmarkdown::draft("'${1}.Rmd'", "eisvogel", "amaryaml")'; } ||
+    { R -e 'rmarkdown::draft("document.Rmd", "eisvogel", "amaryaml")' }
+}
+
+rmb() {
+    { [ -n "$1" ] && rmd $1 book; } ||
+    { rmd index book }
+}
+
+rmg() {
+    { [ -n "$1" ] && rmd $1 github; } ||
+    { rmd README github }
+}
+
+rms() {
+    { [ -n "$1" ] && rmd $1 norbeam; } ||
+    { rmd slideshow norbeam }
+}
+
+chk() {
+    { [ -n "$2" ] && while true ; do ; Re 'spelling::spell_check_files("'$1'", lang="'$2'")' ; sleep 10 ; done ; } ||
+    { [ -n "$1" ] && while true ; do ; Re 'spelling::spell_check_files("'$1'")' ; sleep 10 ; done }
+}
+
+chf() {
+    { chk $1 fr_FR }
+}
+
+Rt() {
+    { [ -n "$2" ] && Re 'formatR::tidy_source("'$1'", pipe = TRUE, indent = 2, file = "'$2'")' ; } ||
+    { [ -n "$1" ] && Re 'formatR::tidy_source("'$1'", pipe = TRUE, indent = 2, file = "'$1'")' }
+}
+
+bdb() { Re 'blogdown::build_site()' }
+bdn() { Re 'blogdown::build_site(build_rmd = "newfile")' }
+bdp() { Re 'blogdown::new_post("'$@'")' }
+bds() { Re 'blogdown::serve_site()' }
+
+Ri() { sRe 'install.packages("'$1'")' }
+Rr() { sRe 'remove.packages("'$1'")' }
+Rg() { sRe 'remotes::install_github("'$1'")' }
+Rs() { sRe 'install.packages("'$1.tar.gz'", type = "source", repos = NULL)' }
+tRs() { tar zcf "$1.tar.gz" "$1" && sRe 'install.packages("'$1.tar.gz'", type = "source", repos = NULL)' && /bin/rm "$1.tar.gz" }

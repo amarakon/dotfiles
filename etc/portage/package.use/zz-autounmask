@@ -1,0 +1,541 @@
+# required by x11-libs/gtk+-3.24.31::gentoo[wayland]
+# required by app-text/zathura-0.4.8::gentoo
+# required by @selected
+# required by @world (argument)
+>=media-libs/mesa-21.3.5 wayland
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/docopt-0.6.2-r4 python_targets_python3_9
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/flask-2.0.2 python_targets_python3_9
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/markdown-3.3.6 python_targets_python3_9
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/path-and-address-2.0.1 python_targets_python3_9
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/pygments-2.11.2 python_targets_python3_9
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/requests-2.27.1 python_targets_python3_9
+# required by dev-python/setuptools_scm-6.4.1::gentoo
+# required by dev-python/zipp-3.7.0::gentoo
+# required by dev-python/importlib_metadata-4.10.1::gentoo
+# required by dev-python/markdown-3.3.6::gentoo[python_targets_python3_9,-python_targets_pypy3,-python_targets_python3_8]
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/setuptools-60.6.0 python_targets_python3_9
+# required by dev-python/setuptools-60.6.0::gentoo
+# required by dev-python/docopt-0.6.2-r4::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/appdirs-1.4.4-r2 python_targets_python3_9
+# required by dev-python/setuptools-60.6.0::gentoo
+# required by dev-python/docopt-0.6.2-r4::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/more-itertools-8.12.0-r1 python_targets_python3_9
+# required by dev-python/setuptools-60.6.0::gentoo
+# required by dev-python/docopt-0.6.2-r4::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/ordered-set-4.1.0 python_targets_python3_9
+# required by dev-python/setuptools_scm-6.4.1::gentoo
+# required by dev-python/zipp-3.7.0::gentoo
+# required by dev-python/importlib_metadata-4.10.1::gentoo
+# required by dev-python/markdown-3.3.6::gentoo[python_targets_python3_9,-python_targets_pypy3,-python_targets_python3_8]
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/packaging-21.3-r2 python_targets_python3_9
+# required by dev-python/requests-2.27.1::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/certifi-3021.3.16-r1 python_targets_python3_9
+# required by dev-python/zipp-3.7.0::gentoo
+# required by dev-python/importlib_metadata-4.10.1::gentoo
+# required by dev-python/markdown-3.3.6::gentoo[python_targets_python3_9,-python_targets_pypy3,-python_targets_python3_8]
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/setuptools_scm-6.4.1 python_targets_python3_9
+# required by dev-python/charset_normalizer-2.0.11::gentoo
+# required by dev-python/requests-2.27.1::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/wheel-0.37.1-r1 python_targets_python3_9
+# required by dev-python/charset_normalizer-2.0.11::gentoo
+# required by dev-python/requests-2.27.1::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/installer-0.4.0_p20220124 python_targets_python3_9
+# required by dev-python/charset_normalizer-2.0.11::gentoo
+# required by dev-python/requests-2.27.1::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/tomli-2.0.0 python_targets_python3_9
+# required by dev-python/pyparsing-3.0.7-r1::gentoo
+# required by dev-python/packaging-21.3-r2::gentoo
+# required by dev-python/setuptools_scm-6.4.1::gentoo
+# required by dev-python/zipp-3.7.0::gentoo
+# required by dev-python/importlib_metadata-4.10.1::gentoo
+# required by dev-python/markdown-3.3.6::gentoo[python_targets_python3_9,-python_targets_pypy3,-python_targets_python3_8]
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/flit_core-3.6.0-r2 python_targets_python3_9
+# required by dev-python/packaging-21.3-r2::gentoo
+# required by dev-python/setuptools_scm-6.4.1::gentoo
+# required by dev-python/zipp-3.7.0::gentoo
+# required by dev-python/importlib_metadata-4.10.1::gentoo
+# required by dev-python/markdown-3.3.6::gentoo[python_targets_python3_9,-python_targets_pypy3,-python_targets_python3_8]
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/pyparsing-3.0.7-r1 python_targets_python3_9
+# required by dev-python/requests-2.27.1::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/charset_normalizer-2.0.11 python_targets_python3_9
+# required by dev-python/requests-2.27.1::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/idna-3.3 python_targets_python3_9
+# required by dev-python/requests-2.27.1::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/urllib3-1.26.8 python_targets_python3_9
+# required by dev-python/urllib3-1.26.8::gentoo
+# required by dev-python/requests-2.27.1::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/PySocks-1.7.1-r1 python_targets_python3_9
+# required by dev-python/markdown-3.3.6::gentoo[python_targets_python3_9,-python_targets_pypy3,-python_targets_python3_8]
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/importlib_metadata-4.10.1 python_targets_python3_9
+# required by dev-python/importlib_metadata-4.10.1::gentoo
+# required by dev-python/markdown-3.3.6::gentoo[python_targets_python3_9,-python_targets_pypy3,-python_targets_python3_8]
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/zipp-3.7.0 python_targets_python3_9
+# required by dev-python/zipp-3.7.0::gentoo
+# required by dev-python/importlib_metadata-4.10.1::gentoo
+# required by dev-python/markdown-3.3.6::gentoo[python_targets_python3_9,-python_targets_pypy3,-python_targets_python3_8]
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/toml-0.10.2 python_targets_python3_9
+# required by dev-python/flask-2.0.2::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/click-8.0.3 python_targets_python3_9
+# required by dev-python/flask-2.0.2::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/blinker-1.4-r2 python_targets_python3_9
+# required by dev-python/flask-2.0.2::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/itsdangerous-2.0.1 python_targets_python3_9
+# required by dev-python/flask-2.0.2::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/jinja-3.0.3 python_targets_python3_9
+# required by dev-python/flask-2.0.2::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/werkzeug-2.0.2 python_targets_python3_9
+# required by dev-python/jinja-3.0.3::gentoo
+# required by dev-python/flask-2.0.2::gentoo
+# required by app-text/grip-4.5.2-r2::gentoo
+# required by app-text/grip (argument)
+>=dev-python/markupsafe-2.0.1 python_targets_python3_9
+# required by media-libs/libass-0.15.2::gentoo
+# required by media-video/mpv-0.34.0::gentoo
+# required by @selected
+# required by @world (argument)
+>=media-libs/harfbuzz-3.3.2 truetype
+# required by dev-python/setuptools-60.8.0::gentoo
+# required by dev-python/werkzeug-2.0.3::gentoo
+# required by dev-python/flask-2.0.2::gentoo
+# required by app-text/grip-4.6.0::gentoo
+# required by @selected
+# required by @world (argument)
+>=dev-python/jaraco-text-3.7.0-r1 python_targets_python3_9
+# required by dev-python/jaraco-text-3.7.0-r1::gentoo
+# required by dev-python/setuptools-60.8.0::gentoo
+# required by dev-python/werkzeug-2.0.3::gentoo
+# required by dev-python/flask-2.0.2::gentoo
+# required by app-text/grip-4.6.0::gentoo
+# required by @selected
+# required by @world (argument)
+>=dev-python/jaraco-context-4.1.1-r1 python_targets_python3_9
+# required by dev-python/jaraco-text-3.7.0-r1::gentoo
+# required by dev-python/setuptools-60.8.0::gentoo
+# required by dev-python/werkzeug-2.0.3::gentoo
+# required by dev-python/flask-2.0.2::gentoo
+# required by app-text/grip-4.6.0::gentoo
+# required by @selected
+# required by @world (argument)
+>=dev-python/jaraco-functools-3.5.0-r1 python_targets_python3_9
+# required by media-gfx/gimp-2.10.30::gentoo
+# required by @selected
+# required by @world (argument)
+>=app-text/poppler-22.02.0 cairo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/lz4-4.0.0 python_targets_python3_9
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/pkgconfig-1.5.5-r1 python_targets_python3_9
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/poetry-core-1.0.7 python_targets_python3_9
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/attrs-21.4.0 python_targets_python3_9
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/jsonschema-4.4.0-r1 python_targets_python3_9
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/lark-parser-0.11.3-r1 python_targets_python3_9
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/pyrsistent-0.18.1 python_targets_python3_9
+# required by dev-python/python-dateutil-2.8.2::gentoo
+# required by dev-python/arrow-1.2.2::gentoo
+# required by dev-python/isoduration-20.11.0::gentoo
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/six-1.16.0 python_targets_python3_9
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/tomlkit-0.9.2 python_targets_python3_9
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/fqdn-1.5.1-r1 python_targets_python3_9
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/isoduration-20.11.0 python_targets_python3_9
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/jsonpointer-2.2 python_targets_python3_9
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/rfc3339-validator-0.1.4 python_targets_python3_9
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/rfc3986-validator-0.1.1-r1 python_targets_python3_9
+# required by dev-python/rfc3986-validator-0.1.1-r1::gentoo
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/rfc3987-1.3.8-r2 python_targets_python3_9
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/uritemplate-4.1.0 python_targets_python3_9
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/webcolors-1.11.1 python_targets_python3_9
+# required by dev-python/rfc3987-1.3.8-r2::gentoo
+# required by dev-python/rfc3986-validator-0.1.1-r1::gentoo
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/regex-2022.1.18 python_targets_python3_9
+# required by dev-python/rfc3339-validator-0.1.4::gentoo
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/strict-rfc3339-0.7-r2 python_targets_python3_9
+# required by dev-python/isoduration-20.11.0::gentoo
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/arrow-1.2.2 python_targets_python3_9
+# required by dev-python/arrow-1.2.2::gentoo
+# required by dev-python/isoduration-20.11.0::gentoo
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/python-dateutil-2.8.2 python_targets_python3_9
+# required by dev-python/attrs-21.4.0::gentoo
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/zope-interface-5.4.0 python_targets_python3_9
+# required by dev-python/zope-interface-5.4.0::gentoo
+# required by dev-python/attrs-21.4.0::gentoo
+# required by dev-python/jsonschema-4.4.0-r1::gentoo
+# required by dev-python/poetry-core-1.0.7::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.0::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/namespace-zope-1-r1 python_targets_python3_9
+# required by dev-texlive/texlive-xetex-2021-r1::gentoo
+# required by texlive-xetex (argument)
+>=app-text/texlive-core-2021-r1 xetex
+# required by media-sound/jack-4.0.0_pre20201220-r1::gentoo[python_single_target_python3_9]
+# required by media-sound/jack (argument)
+>=dev-python/python-discid-1.2.0-r1 python_targets_python3_9
+# required by media-sound/jack-4.0.0_pre20201220-r1::gentoo[python_single_target_python3_9]
+# required by media-sound/jack (argument)
+>=media-libs/mutagen-1.45.1 python_targets_python3_9
+# required by dev-lang/R-4.1.2::gentoo
+# required by R (argument)
+>=sys-libs/zlib-1.2.11-r4 minizip
+# required by virtual/fortran-0::gentoo
+# required by sci-libs/lapack-3.10.0::gentoo
+# required by virtual/blas-3.8::gentoo
+# required by dev-lang/R-4.1.2::gentoo
+# required by R (argument)
+>=sys-devel/gcc-11.2.1_p20220115 fortran
+# required by sci-mathematics/rstudio-1.3.1093-r1::gentoo
+# required by rstudio (argument)
+=dev-java/validation-api-1.0.0-r1 source
+# required by sci-mathematics/rstudio-1.3.1093-r1::gentoo[-dedicated]
+# required by rstudio (argument)
+>=dev-qt/qtwebengine-5.15.2_p20211216 widgets
+# required by dev-qt/qtwebengine-5.15.2_p20211216::gentoo
+# required by sci-mathematics/rstudio-1.3.1093-r1::gentoo[-dedicated]
+# required by rstudio (argument)
+>=dev-qt/qtwebchannel-5.15.2-r10 qml
+# required by dev-qt/qtwebengine-5.15.2_p20211216::gentoo[widgets]
+# required by sci-mathematics/rstudio-1.3.1093-r1::gentoo[-dedicated]
+# required by rstudio (argument)
+>=dev-qt/qtdeclarative-5.15.2-r15 widgets
+# required by dev-python/setuptools-62.0.0::gentoo
+# required by dev-python/mako-1.2.0::gentoo
+# required by media-libs/mesa-22.0.1::gentoo
+# required by x11-libs/gtk+-3.24.33-r1::gentoo[wayland]
+# required by app-text/zathura-0.4.9::gentoo
+# required by @selected
+# required by @world (argument)
+>=dev-python/nspektr-0.3.0 python_targets_python3_9
+# required by x11-base/xorg-server-21.1.3-r1::gentoo[-minimal]
+# required by x11-base/xorg-drivers-21.1::gentoo[video_cards_intel]
+>=media-libs/libepoxy-1.5.10 egl
+# required by www-client/librewolf-bin-97.0.2::librewolf
+# required by @selected
+# required by @world (argument)
+>=x11-libs/gtk+-3.24.33-r1 wayland
+# required by net-misc/networkmanager-1.36.4::gentoo[wifi,-iwd]
+# required by @selected
+# required by @world (argument)
+>=net-wireless/wpa_supplicant-2.10-r1 dbus
+# required by media-gfx/gimp-2.10.30::gentoo
+# required by @selected
+# required by @world (argument)
+>=media-libs/gegl-0.4.36-r1 cairo
+# required by app-admin/eclean-kernel-2.99.3::gentoo
+# required by @selected
+# required by @world (argument)
+>=dev-python/pymountboot-0.2.3-r1 python_targets_python3_9
+# required by sys-fs/udev-250::gentoo
+# required by virtual/libudev-232-r7::gentoo[-systemd]
+# required by x11-base/xorg-server-21.1.3-r1::gentoo[udev]
+# required by x11-base/xorg-drivers-21.1::gentoo[input_devices_libinput,-input_devices_evdev]
+=sys-apps/systemd-utils-250.4-r3 udev
+# required by net-print/cups-filters-1.28.15::gentoo
+# required by net-print/cups-2.3.3_p2-r3::gentoo
+# required by cups (argument)
+>=app-text/poppler-22.03.0 cxx
+# required by dev-python/more-itertools-8.13.0::gentoo
+# required by dev-python/jaraco-functools-3.5.0-r2::gentoo
+# required by dev-python/jaraco-text-3.7.0-r2::gentoo
+# required by dev-python/setuptools-62.3.2::gentoo
+# required by dev-python/mako-1.2.0::gentoo
+# required by media-libs/mesa-22.1.0::gentoo
+# required by x11-libs/gtk+-3.24.34::gentoo[X]
+# required by www-client/firefox-bin-100.0.2::gentoo
+# required by @selected
+# required by @world (argument)
+>=dev-python/gpep517-6 python_targets_python3_9
+# required by x11-misc/xdg-utils-1.1.3_p20210805::gentoo
+# required by dev-lang/R-4.2.0::gentoo[X]
+# required by @selected
+# required by @world (argument)
+>=app-text/xmlto-0.0.28-r8 text
+# required by sys-fs/udev-250::gentoo
+# required by virtual/libudev-232-r7::gentoo[-systemd]
+# required by sys-auth/elogind-246.10-r2::gentoo
+# required by net-misc/networkmanager-1.38.0::gentoo[elogind]
+# required by @selected
+# required by @world (argument)
+=sys-apps/systemd-utils-250.5 udev
+# required by app-text/tesseract-5.1.0::gentoo
+# required by app-text/zathura-pdf-mupdf-0.3.8-r1::gentoo
+# required by zathura-pdf-mupdf (argument)
+>=media-libs/leptonica-1.82.0 zlib
+# required by dev-python/poetry-core-1.0.8::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.1::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/lark-1.1.2 python_targets_python3_9
+# required by dev-python/jsonschema-4.5.1::gentoo
+# required by dev-python/poetry-core-1.0.8::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.1::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/uri_template-1.2.0 python_targets_python3_9
+# required by sys-fs/udev-250::gentoo
+# required by virtual/libudev-232-r7::gentoo[-systemd]
+# required by sys-auth/elogind-246.10-r2::gentoo
+# required by media-video/wireplumber-0.4.10-r3::gentoo[elogind]
+# required by media-video/pipewire-0.3.51-r1::gentoo
+# required by media-libs/libsdl2-2.0.20-r1::gentoo
+# required by media-video/ffmpeg-4.4.2::gentoo[sdl]
+# required by www-client/firefox-bin-101.0::gentoo[ffmpeg]
+# required by @selected
+# required by @world (argument)
+=sys-apps/systemd-utils-250.6 udev
+# required by dev-python/jsonschema-4.6.0::gentoo
+# required by dev-python/poetry-core-1.0.8::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.1::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/hatch-vcs-0.2.0 python_targets_python3_9
+# required by dev-python/hatch-vcs-0.2.0::gentoo
+# required by dev-python/jsonschema-4.6.0::gentoo
+# required by dev-python/poetry-core-1.0.8::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.1::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/hatchling-1.3.1 python_targets_python3_9
+# required by dev-python/hatchling-1.3.1::gentoo[-test]
+# required by dev-python/hatch-vcs-0.2.0::gentoo
+# required by dev-python/jsonschema-4.6.0::gentoo
+# required by dev-python/poetry-core-1.0.8::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.1::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/editables-0.3 python_targets_python3_9
+# required by dev-python/hatchling-1.3.1::gentoo[-test]
+# required by dev-python/hatch-vcs-0.2.0::gentoo
+# required by dev-python/jsonschema-4.6.0::gentoo
+# required by dev-python/poetry-core-1.0.8::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.1::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/pathspec-0.9.0-r1 python_targets_python3_9
+# required by dev-python/hatchling-1.3.1::gentoo[-test]
+# required by dev-python/hatch-vcs-0.2.0::gentoo
+# required by dev-python/jsonschema-4.6.0::gentoo
+# required by dev-python/poetry-core-1.0.8::gentoo
+# required by dev-python/pkgconfig-1.5.5-r1::gentoo
+# required by dev-python/lz4-4.0.1::gentoo
+# required by app-admin/eclean-kernel-2.99.3::gentoo[lz4]
+# required by @selected
+# required by @world (argument)
+>=dev-python/pluggy-1.0.0-r2 python_targets_python3_9
+# required by sys-fs/udev-250::gentoo
+# required by virtual/libudev-232-r7::gentoo[-systemd]
+# required by x11-base/xorg-server-21.1.3-r3::gentoo
+# required by @selected
+# required by @world (argument)
+=sys-apps/systemd-utils-250.7 udev

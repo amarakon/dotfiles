@@ -1,0 +1,165 @@
+# created by eselect-repo
+
+[swirl]
+location = /var/db/repos/swirl
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/swirl.git
+
+[nitratesky]
+location = /var/db/repos/nitratesky
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/nitratesky.git
+
+[kske]
+location = /var/db/repos/kske
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/kske.git
+
+[tatsh-overlay]
+location = /var/db/repos/tatsh-overlay
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/tatsh-overlay.git
+
+
+
+
+
+
+[mv]
+location = /var/db/repos/mv
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/mv.git
+
+
+[lto-overlay]
+location = /var/db/repos/lto-overlay
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/lto-overlay.git
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[deepin]
+location = /var/db/repos/deepin
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/deepin.git
+
+
+
+
+
+
+
+
+[src_prepare-overlay]
+location = /var/db/repos/src_prepare-overlay
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/src_prepare-overlay.git
+
+
+
+
+
+
+
+
+
+[librewolf]
+location = /var/db/repos/librewolf
+sync-type = git
+sync-uri = https://gitlab.com/librewolf-community/browser/gentoo.git
+
+[crocket-overlay]
+location = /var/db/repos/crocket-overlay
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/crocket-overlay.git
+
+
+
+[gentoobr]
+location = /var/db/repos/gentoobr
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/gentoobr.git
+
+
+
+[toniz4-overlay]
+location = /var/db/repos/toniz4-overlay
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/toniz4-overlay.git
+
+
+
+
+
+
+
+
+
+
+[thegreatmcpain]
+location = /var/db/repos/thegreatmcpain
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/thegreatmcpain.git
+
+[steam-overlay]
+location = /var/db/repos/steam-overlay
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/steam-overlay.git
+
+
+
+
+
+
+
+
+[ferki]
+location = /var/db/repos/ferki
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/ferki.git
+
+
+
+[nest]
+location = /var/db/repos/nest
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/nest.git
+
+[guru]
+location = /var/db/repos/guru
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/guru.git
+
+[amarlay]
+location = /var/db/repos/amarlay
+sync-type = git
+sync-uri = https://github.com/Amarakon55/amarlay
+
+[R_Overlay]
+location = /var/db/repos/R_Overlay
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/R_Overlay.git
+
+
+[edgets]
+location = /var/db/repos/edgets
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/edgets.git
+
+
+
+[brother-overlay]
+location = /var/db/repos/brother-overlay
+sync-type = git
+sync-uri = https://github.com/gentoo-mirror/brother-overlay.git

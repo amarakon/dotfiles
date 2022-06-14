@@ -1,0 +1,10 @@
+--- a/bd	2022-02-04 11:53:59.346306697 -0500
++++ b/bd	2022-02-04 11:56:15.899315990 -0500
+@@ -48,7 +48,6 @@
+   then
+     echo "No such occurrence."
+   else
+-    echo $NEWPWD
+     cd "$NEWPWD"
+   fi
+   unset NEWPWD

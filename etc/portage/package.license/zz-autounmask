@@ -1,0 +1,5 @@
+# required by net-print/brother-dcp7065dn-bin-1.0::brother-overlay
+# required by net-print/brother-dcp7065dn-bin (argument)
+>=net-print/brother-genml1-bin-3.1.0-r1 brother-eula
+# required by vscode (argument)
+>=app-editors/vscode-1.67.2 Microsoft-vscode

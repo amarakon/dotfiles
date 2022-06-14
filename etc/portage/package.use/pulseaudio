@@ -1,0 +1,1 @@
+media-sound/pulseaudio -X -asyncns -elogind -gdbm -orc -ssl -webrtc-aec -glib

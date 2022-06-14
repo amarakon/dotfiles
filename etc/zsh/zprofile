@@ -1,0 +1,124 @@
+# Load environment settings from profile.env, which is created by
+# env-update from the files in /etc/env.d
+if [[ -e /etc/profile.env ]] ; then
+	. /etc/profile.env
+fi
+
+source /etc/profile
+
+# 077 would be more secure, but 022 is generally quite realistic
+umask 022
+bindkey -v
+export KEYTIMEOUT=1
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select () {
+    case $KEYMAP in
+        vicmd) echo -ne '\e[2 q';;      # block
+        viins|main) echo -ne '\e[6 q';; # beam
+    esac
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[6 q"
+}
+zle -N zle-line-init
+echo -ne '\e[6 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[6 q' ;} # Use beam shape cursor for each new prompt.
+
+# Set up PATH depending on whether we're root or a normal user.
+# There's no real reason to exclude sbin paths from the normal user,
+# but it can make tab-completion easier when they aren't in the
+# user's PATH to pollute the executable namespace.
+#
+# It is intentional in the following line to use || instead of -o.
+# This way the evaluation can be short-circuited and calling whoami is
+# avoided.
+if [[ "$EUID" = "0" ]] || [[ "$USER" = "root" ]] ; then
+	# Check to make sure ROOTPATH is sane before we use it.
+	# https://bugs.gentoo.org/656400
+	if [[ :${ROOTPATH}: == *:/usr/sbin:* ]]; then
+		PATH="${ROOTPATH}"
+	fi
+fi
+export PATH
+unset ROOTPATH
+
+setopt interactive_comments
+shopts=$-
+setopt nullglob
+for sh in /etc/profile.d/*.sh ; do
+	[[ -r "${sh}" ]] && . "${sh}"
+done
+unsetopt nullglob
+set -$shopts
+unset sh shopts
+
+# Extras
+HISTSIZE=1000000000
+SAVEHIST=1000000000
+setopt extendedhistory histexpiredupsfirst histfindnodups histignoredups histignorespace histsavenodups histverify sharehistory
+
+# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
+LS_COLORS=
+if [[ -f ~/.dir_colors ]] ; then
+        eval "$(dircolors -b ~/.dir_colors)"
+elif [[ -f /etc/DIR_COLORS ]] ; then
+        eval "$(dircolors -b /etc/DIR_COLORS)"
+else
+        eval "$(dircolors -b)"
+fi
+
+if [[ -f /usr/share/zsh/site-functions/zsh-autosuggestions.zsh ]] ; then
+        source /usr/share/zsh/site-functions/zsh-autosuggestions.zsh
+fi
+if [[ -f /usr/share/zsh/site-functions/zsh-history-substring-search.zsh ]] ; then
+        source /usr/share/zsh/site-functions/zsh-history-substring-search.zsh
+fi
+if [[ -f /etc/grc.zsh ]] ; then
+        source /etc/grc.zsh
+fi
+if [[ -f ~/.local/share/grc/grc.zsh ]] ; then
+        source ~/.local/share/grc/grc.zsh
+fi
+if [[ -f /etc/aliasrc ]] ; then
+        source /etc/aliasrc
+fi
+if [[ -f /etc/functionrc ]] ; then
+        source /etc/functionrc
+fi
+if [[ -f ~/.aliasrc ]] ; then
+        source ~/.aliasrc
+fi
+if [[ -f ~/.config/shell/aliasrc ]] ; then
+        source ~/.config/shell/aliasrc
+fi
+if [[ -f ~/.functionrc ]] ; then
+        source ~/.functionrc
+fi
+if [[ -f ~/.config/shell/functionrc ]] ; then
+        source ~/.config/shell/functionrc
+fi
+
+autoload -Uz compinit vcs_info
+precmd() { vcs_info }
+zstyle :compinstall filename '/home/amarakon/.zshrc' 
+zstyle ':vcs_info:git:*' formats ' %F{cyan}(%F{blue}git –%F{green} -%b%F{cyan})'
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+setopt prompt_subst
+#compinit -i
+# Shamelessly borrowed from Prezto. Regenerates the completion cache approximately daily.
+_comp_files=($XDG_CACHE_HOME/zsh/zcompcache(Nm-20))
+if (( $#_comp_files )); then
+    compinit -i -C -d "$XDG_CACHE_HOME/zsh/zcompcache"
+else
+    compinit -i -d "$XDG_CACHE_HOME/zsh/zcompcache"
+fi
+unset _comp_files
+
+zle_highlight+=(paste:none)
+
+{ [ "$(whoami)" = "root" ] && PROMPT='%B%F{blue}[%~${vcs_info_msg_0_}%F{blue}]%F{red}#%b%f '; } ||
+{ PROMPT='%B%F{blue}[%~${vcs_info_msg_0_}%F{blue}]%b%F{green}$%b%f '; }
