@@ -89,7 +89,8 @@ if has("autocmd")
 endif
 
 autocmd Filetype rmd map m :up \| !R --quiet -e 'rmarkdown::render("%")'<CR>
-autocmd Filetype rmd map M :up \| !R --quiet -e 'bookdown::render_book("index.Rmd")'<CR>
+"autocmd Filetype rmd map M :up \| !R --quiet -e 'bookdown::render_book("index.Rmd")'<CR>
+autocmd Filetype rmd map M :up \| !R --quiet -e 'rmarkdown::render("%")' && R --quiet -e 'browseURL("%:r.html")'<CR>
 autocmd Filetype rnoweb map m :up \| !R --quiet -e 'knitr::knit2pdf("%")'<CR>
 autocmd Filetype tex map m :up \| !pdflatex %<CR>
 autocmd Filetype rmd map  a\text{<Esc>
@@ -126,4 +127,5 @@ autocmd Filetype rmd :inoremap <F8> <C-o>:.-1read /usr/lib64/R/site-library/amar
 autocmd Filetype rmd :inoremap <F9> <C-o>:.-1read /usr/lib64/R/site-library/amaryaml/rmarkdown/templates/book/skeleton/skeleton.Rmd<CR><CR>
 autocmd Filetype rmd :inoremap <F10> <C-o>:.-1read /usr/lib64/R/site-library/amaryaml/rmarkdown/templates/github/skeleton/skeleton.Rmd<CR><CR>
 
- map z :silent !setsid $READER '%:r'.pdf<CR>
+map z :silent !setsid $READER '%:r'.pdf<CR>
+map Z :silent !R --quiet -e 'browseURL("%:r.html")'<CR>
