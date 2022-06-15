@@ -1,0 +1,4 @@
+#!/bin/sh
+
+title="backup-$(date +'%Y-%m-%d_%R:%S')"
+tar -I lz4 -cf /mnt/ssd1/${title}.tar.lz4 /etc /home /usr /var > /dev/null 2>&1
