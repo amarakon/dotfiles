@@ -1,6 +1,10 @@
 colorscheme nord
 
-autocmd filetype r let R_auto_start = 1
+"autocmd filetype r let R_auto_start = 1
+
+let R_assign = 3
+
+"let R_assign_map = '<M-->'
 
 let R_open_example = 0
 
@@ -25,8 +29,8 @@ let g:rainbow_conf = {
 let g:indent_blankline_char_list = ['│', '┊', '┆', '|', '¦']
 
 " Change Leader and LocalLeader keys:
-let maplocalleader = ','
-let mapleader = ';'
+let maplocalleader = ';'
+let mapleader = ','
 
 " Use Ctrl+Space to do omnicompletion:
 if has('nvim') || has('gui_running')
@@ -63,7 +67,6 @@ map j :redo<CR>
 "map k :up \| silent !trash '%:r'.md<CR>
 map k :on<CR>
 map K :up \| silent !trash '%:r'.md<CR>
-"map K :up \| silent !trash '%:r'.html<CR>
 map <C-y> "+y
 map <C-d> "+d
 map <C-p> "+p
@@ -110,9 +113,9 @@ autocmd Filetype rmd imap <C-e> &rarr;
 autocmd Filetype rmd imap <C-l> &darr;
 autocmd Filetype rmd imap <C-y> &uarr;
 autocmd Filetype rmd imap <C-z> $$<Left>
-autocmd Filetype rmd imap <C-r> ```<CR><Up><Right><Right><Right>
-autocmd Filetype rmd imap <C-s> :::<CR><CR><CR><CR>:::<Up><Up><Up><Up>
-autocmd Filetype rmd imap <C-t> ::: {. latex=""}<CR><CR><CR><CR>:::<Up><Up><Up><Up><Right><Right><Right>
+autocmd Filetype rmd imap <C-r> ```<CR><Backspace><Right><Right><Right>
+autocmd Filetype rmd imap <C-s> :::<CR>:::<Up>
+autocmd Filetype rmd imap <C-t> ::: {. latex=""}<CR>:::<Up><Right><Right><Right>
 autocmd Filetype rmd imap <C-g> \@ref(
 autocmd Filetype rmd imap <C-k> \num{
 autocmd Filetype rmd imap <C-c> <!--  --><Left><Left><Left><Left>

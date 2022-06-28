@@ -13,7 +13,7 @@ static const char *DEFAULT_MARK_COLOR = "#4C566A";  /* NULL means it will defaul
 #if HAVE_LIBFONTS
 static const char *DEFAULT_BAR_BG     = "#4C566A";  /* NULL means it will default to window background */
 static const char *DEFAULT_BAR_FG     = "#E5E9F0";  /* NULL means it will default to window foreground */
-static const char *DEFAULT_FONT       = "Inconsolata Nerd Font 12";
+static const char *DEFAULT_FONT       = "Inconsolata Nerd Font 11";
 #endif
 
 #endif

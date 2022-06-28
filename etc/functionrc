@@ -1,13 +1,5 @@
 #!/bin/sh
 
-#lsd() {
-#    if [ -n "$1" ]; then
-#	(cd $1 && lsd --color=always -XF -d * .[!.]*)
-#    else
-#	lsd --color=always -XF -d * .[!.]*
-#    fi
-#}
-
 t() { cd "$@" && a }
 ta() { cd "$@" && aa }
 tl() { cd "$@" && al }

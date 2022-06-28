@@ -31,7 +31,7 @@ vs() {
     { printf $file.h | xargs -I {} doas $EDITOR /etc/portage/savedconfig/"{}"; }
 }
 
-rm() { print "Use trash-cli instead." }
+#rm() { d "$@" }
 ti() { time ("$@") }
 
 esl() { eselect "$@" list }
@@ -195,3 +195,9 @@ Rr() { sRe 'remove.packages("'$1'")' }
 Rg() { sRe 'remotes::install_github("'$1'")' }
 Rs() { sRe 'install.packages("'$1.tar.gz'", type = "source", repos = NULL)' }
 tRs() { tar zcf "$1.tar.gz" "$1" && sRe 'install.packages("'$1.tar.gz'", type = "source", repos = NULL)' && /bin/rm "$1.tar.gz" }
+
+calendar() {
+    date=$(date +%Y)
+
+    parallel mpost \"\\theyear:=$date\\\; themonth:={1}\\\; input calendar\" ::: $(seq 01 12) && parallel ps2pdf calendar.{1} ::: $(seq 1 12) && pdfjam --landscape $(printf "calendar.%d.pdf " $(seq 1 12) ) && mv calendar.12-pdfjam.pdf calendar-$date.pdf && d $(printf "calendar.%d " $(seq 1 12)) $(printf "calendar.%d.pdf " $(seq 1 12))
+}

@@ -60,15 +60,7 @@ HISTSIZE=1000000000
 SAVEHIST=1000000000
 setopt extendedhistory histexpiredupsfirst histfindnodups histignoredups histignorespace histsavenodups histverify sharehistory
 
-# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
-LS_COLORS=
-if [[ -f ~/.dir_colors ]] ; then
-        eval "$(dircolors -b ~/.dir_colors)"
-elif [[ -f /etc/DIR_COLORS ]] ; then
-        eval "$(dircolors -b /etc/DIR_COLORS)"
-else
-        eval "$(dircolors -b)"
-fi
+eval "$(dircolors -b)"
 
 if [[ -f /usr/share/zsh/site-functions/zsh-autosuggestions.zsh ]] ; then
         source /usr/share/zsh/site-functions/zsh-autosuggestions.zsh
