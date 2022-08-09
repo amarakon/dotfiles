@@ -18,7 +18,7 @@ set guioptions ""
 
 # zathurarc-dark
 
-set font "Inconsolata Nerd Font 11"
+set font "Latin Modern Roman 11"
 set default-fg "#d8dee9" #00
 set default-bg "#2E3440" #01
 
@@ -59,8 +59,6 @@ set notification-fg "#d8dee9" #00
 set render-loading "true"
 set scroll-step 50
 
-set selection-clipboard clipboard
-
 unmap f
 map f toggle_fullscreen
 map [fullscreen] f toggle_fullscreen
@@ -70,3 +68,6 @@ map = zoom in
 map 0 zoom
 
 map <C-c> feedkeys ":exec sh -c \"echo $FILE | xclip -i -sel clip\"<Return>"
+
+set window-title-basename "true"
+set statusbar-basename "true"

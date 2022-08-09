@@ -49,9 +49,6 @@
 *.color14: nord7
 *.color15: nord6
 
-!URxvt.color
-!#858381
-
 *.font: Inconsolata Nerd Font:size=11
 
 URxvt.secondaryScreen: 1
@@ -107,12 +104,3 @@ URxvt.keysym.C-backslash:  font-size:show
 
 URxvt.internalBorder: 0
 URxvt.externalBorder: 0
-
-!URxvt.matcher.rend.0: Uline fg6
-
-! Disable fading
-!URxvt*fading: false
-
-! Bell
-!URxvt.bell-command: setsid mpv --keep-open=no /usr/share/sounds/freedesktop/stereo/bell.oga &>/dev/null
-!Sxiv.font: Inconsolata Nerd Font:size=11

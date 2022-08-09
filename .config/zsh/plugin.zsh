@@ -15,7 +15,7 @@ HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 ### Zsh Auto Suggestions ###
 ############################
 ## Load the zsh-autosuggestions plugin.
-. usr/share/zsh/site-functions/zsh-autosuggestions.plugin.zsh > /dev/null 2>&1
+. /usr/share/zsh/site-functions/zsh-autosuggestions.plugin.zsh > /dev/null 2>&1
 
 ## Set active suggestion groups.
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
@@ -48,3 +48,4 @@ AUTOPAIR_BETWEEN_WHITESPACE=1
 ## Load the zsh-many-dots-magic plugin.
 . /usr/share/zsh/site-functions/manydots-magic > /dev/null 2>&1
 
+. ~/.local/src/amarakon/zsh-bd/bd.zsh

@@ -1,9 +1,16 @@
 #!/bin/sh
 
-t() { cd "$@" && a }
-ta() { cd "$@" && aa }
-tl() { cd "$@" && al }
-tla() { cd "$@" && ala }
-tt() { cd "$@" && at }
-tta() { cd "$@" && ata }
-r() { s "$@" && a }
+o() {
+    { [ $# -gt 0 ] && cd "$@"; } ||
+    { [ $# -eq 0 ] && cd; }
+    realpath -s . > /tmp/terminal_pwd
+}
+t() { o "$@" && a; }
+ta() { o "$@" && aa; }
+tl() { o "$@" && al; }
+tla() { o "$@" && ala; }
+tt() { o "$@" && at; }
+tta() { o "$@" && ata; }
+s() { if [ -n "$1" ]; then bd "$@"; else cd ..; fi; }
+r() { s "$@" && a; }
+m() { if [ -n "$1" ]; then doas "$@"; else su; fi; }

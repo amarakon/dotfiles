@@ -6,6 +6,9 @@ export HISTFILE=~/.cache/zsh/history
 
 [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && startx "$XDG_CONFIG_HOME/X11/xinitrc" &>/dev/null
 
+. /usr/share/zsh/site-functions/_fzf
+. /usr/share/fzf/key-bindings.zsh
+
 # Keybindings
 cl() { clear; zle reset-prompt }
 za() { printf '\n' && a; zle reset-prompt }
@@ -15,6 +18,8 @@ cla() { clear && a; zle reset-prompt }
 clal() { clear && al; zle reset-prompt }
 clat() { clear && at; zle reset-prompt }
 zdman() { printf '\n' ; apropos . | dmenu -l 10 | cut -d ' ' -f1 | xargs -I {} man "{}"; zle reset-prompt }
+term() { setsid $TERMINAL --working-directory="$(pwd)" &> /dev/null; }
+zbd() { bd && print && a ; zle reset-prompt; }
 
 zle -N cl
 zle -N za
@@ -24,16 +29,18 @@ zle -N cla
 zle -N clal
 zle -N clat
 zle -N zdman
+zle -N term
+zle -N zbd
 
 zmodload zsh/complist
 bindkey -M menuselect '\t' accept-and-infer-next-history
 bindkey '^Y' cl
 bindkey '^K' zdman
+bindkey '^A' term
 bindkey '^N' za
 bindkey '^E' zal
-bindkey '^O' zat
-bindkey '^T' cla
-bindkey '^A' clat
+bindkey '^O' cla
+bindkey '^B' zbd
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 

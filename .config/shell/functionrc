@@ -13,31 +13,31 @@ trashempty="$sound/trash-empty.wav"
 deviceadded="$sound/device-added.wav"
 servicelogout="$sound/desktop-logout.wav"
 
-mdp() { setsid grip -b --quiet "$@" &>/dev/null  }
+mdp() { setsid grip -b --quiet "$@" &>/dev/null; }
 
-yc() {  
+yc() {
     name="$(printf $1 | cut -d '/' -f 4)"
     repo="$(printf $1 | cut -d '/' -f 5)"
 
     mkdir $name; cd $name && git clone $1 && cd $repo
 }
 
-v() { ls -d ~/.config/*/* ~/.config/*/.* | dmenu -i -l 10 | xargs -I {} $EDITOR "{}" }
+v() {
+    list() { ls --group-directories-first -d "$@"; }
+    (cd ~/.config && echo "$(list */* ; list */.*)" | fzf | xargs -I {} $EDITOR "{}")
+}
 
-vs() { 
-    file="$(ls -d /etc/portage/savedconfig/*/* | awk -F '/etc/portage/savedconfig/' '{print $2}' | grep -v '\.h$' | dmenu -i -l 10)"
+vs() {
+    file="$(ls -d /etc/portage/savedconfig/*/* | awk -F '/etc/portage/savedconfig/' '{print $2}' | grep -v '\.h$' | fzf)"
 
     { [ -z "$(ls /etc/portage/savedconfig/$file.h)" ] && printf $file | xargs -I {} doas $EDITOR /etc/portage/savedconfig/"{}"; } ||
     { printf $file.h | xargs -I {} doas $EDITOR /etc/portage/savedconfig/"{}"; }
 }
 
-#rm() { d "$@" }
-ti() { time ("$@") }
-
-esl() { eselect "$@" list }
-ess() { doas eselect "$1" set "$2" && eselect "$1" list }
-ese() { doas eselect "$1" enable "$2" && eselect "$1" list }
-esd() { doas eselect "$1" disable "$2" && eselect "$1" list }
+esl() { eselect "$@" list; }
+ess() { doas eselect "$1" set "$2" && eselect "$1" list; }
+ese() { doas eselect "$1" enable "$2" && eselect "$1" list; }
+esd() { doas eselect "$1" disable "$2" && eselect "$1" list; }
 
 esr() {
     if [ -n "$2" ]; then
@@ -47,157 +47,177 @@ esr() {
     fi
 }
 
-esrd() { doas eselect repository disable "$@" && eselect repository list -i }
-esrr() { doas eselect repository remove -f "$@" && eselect repository list -i }
+l() {
+	if [ -n "$1" ]; then
+		locate "$@" |
+			grep ^$(pwd) | sed "s|^$(pwd)/||" | grep -vE "^\.|/\." |
+			lscolors
+	else doas updatedb; fi
+}
+la() { locate "$@" | grep ^$(pwd) | sed "s|^$(pwd)/||" | lscolors; }
+L() { locate "$@" | grep -vE "^\.|/\." | lscolors; }
+La() { locate "$@" | lscolors; }
 
-f() { if [ -n "$1" ]; then
-	eix "$@"
-else
-	doas eix-update 
-fi }
+esrd() { doas eselect repository disable "$@" && eselect repository list -i; }
+esrr() { doas eselect repository remove -f "$@" && eselect repository list -i; }
+
+f() {
+    if [ -n "$1" ]; then
+	if [ "$1" = "-c" -o "$1" = "--compact" ]; then
+	    eix "$@"
+	else
+	    eix --verbose "$@"
+	fi
+    else
+	doas eix-update
+    fi
+}
 
 F() { if [ -n "$1" ]; then
 	eix -R "$@"
 else
 	doas eix-remote update
-fi }
+fi; }
 
 g() { if [ -n "$1" ]; then
 doas emerge "$@" && pl "$bell" || pl "$dialogerror"
 else
 doas emerge -uDN @world && pl "$message" || pl "$messagenewinstant"
-fi }
+fi; }
 
 ga() { if [ -n "$1" ]; then
 doas emerge -a "$@" && pl "$bell" || pl "$dialogerror"
 else
 doas emerge -auDN @world && pl "$message" || pl "$messagenewinstant"
-fi }
+fi; }
 
 gs() { if [ -n "$1" ]; then
 doas emerge --usepkg=n "$@" && pl "$bell" || pl "$dialogerror"
 else
 doas emerge --usepkg=n -auDN @world && pl "$message" || pl "$messagenewinstant"
-fi }
+fi; }
 
 gsa() { if [ -n "$1" ]; then
 doas emerge --usepkg=n -a "$@" && pl "$bell" || pl "$dialogerror"
 else
 doas emerge --usepkg=n -auDN @world && pl "$message" || pl "$messagenewinstant"
-fi }
+fi; }
 
 B() { if [ -n "$1" ]; then
 doas emerge -DU "$@" && pl "$bell" || pl "$dialogerror"
 else
 doas emerge -DU @world && pl "$message" || pl "$messagenewinstant"
-fi }
+fi; }
 
 k() { if [ -n "$1" ]; then
 doas genkernel --compress-initramfs --compress-initramfs-type=lz4 "$@"
 else
 doas genkernel --compress-initramfs --compress-initramfs-type=lz4 all && pl "$complete" || pl "$servicelogout"
-fi }
+fi; }
 
 km() { if [ -n "$1" ]; then
 genkernel --menuconfig "$@"
 else
 doas genkernel --menuconfig all && pl "$complete" || pl "$servicelogout"
-fi }
+fi; }
 
 c() { if [ -n "$1" ]; then
 eclean-kernel "$@"
 else
 doas eclean-kernel -a && pl "$trashempty" || pl "$dialoginformation"
-fi }
+fi; }
 
 ca() { if [ -n "$1" ]; then
 eclean-kernel -A "$@"
 else
 doas eclean-kernel -Aa && pl "$trashempty" || pl "$dialoginformation"
-fi }
+fi; }
 
 C() { if [ -n "$1" ]; then
 eclean "$@"
 else
 doas eclean-dist -d && doas eclean-pkg -d && pl "$trashempty" || pl "$dialoginformation"
-fi }
+fi; }
 
 Ca() { if [ -n "$1" ]; then eclean -i "$@"
 else
 doas eclean-dist -id && doas eclean-pkg -id && pl "$trashempty" || pl "$dialoginformation"
-fi }
+fi; }
 
-j() { doas emerge -c "$@" && pl "$trashempty" || pl "$dialoginformation" }
-ja() { doas emerge -ca "$@" && pl "$trashempty" || pl "$dialoginformation" }
-J() { doas emerge -C "$@" && pl "$trashempty" || pl "$dialoginformation" }
-Ja() { doas emerge -Ca "$@" && pl "$trashempty" || pl "$dialoginformation" }
-b() { doas emerge --sync "$@" && pl "$deviceadded" || pl "$dialogwarning" }
-ba() { doas emerge --sync -a "$@" && pl "$deviceadded" || pl "$dialogwarning" }
+j() { doas emerge -c "$@" && pl "$trashempty" || pl "$dialoginformation"; }
+ja() { doas emerge -ca "$@" && pl "$trashempty" || pl "$dialoginformation"; }
+J() { doas emerge -C "$@" && pl "$trashempty" || pl "$dialoginformation"; }
+Ja() { doas emerge -Ca "$@" && pl "$trashempty" || pl "$dialoginformation"; }
+b() { doas emerge --sync "$@" && pl "$deviceadded" || pl "$dialogwarning"; }
+ba() { doas emerge --sync -a "$@" && pl "$deviceadded" || pl "$dialogwarning"; }
 
 
-de() { [ -n "$1" ] && trash-rm "$@" || trash-empty }
-sde() { [ -n "$1" ] && doas trash-rm "$@" || doas trash-empty }
-u() { [ -n "$1" ] && nsxiv -q "$@" || nsxiv -qt * }
-U() { [ -n "$1" ] && nsxiv -qf "$@" || nsxiv -qft * }
-wi() { [ -n "$1" ] && nmcli dev wifi connect -a "$@" && nmcli con show || nmcli dev wifi list }
-wir () { [ -n "$1" ] && nmcli radio wifi "$@" && nmcli radio wifi || nmcli radio wifi }
-#y() { g $(qsearch -aqC | fzf | cut -d ':' -f1) }
-#yR() { g $(eix -Rc | fzf | cut -d ' ' -f2) }
-#ys() { gs $(qsearch -aqC | fzf | cut -d ':' -f1) }
-#yr() { b $(eix -cI --pure-packages | fzf | cut -d ' ' -f2) }
-#yrs() { b $(eix -cI --selected --pure-packages | fzf | cut -d ' ' -f2) }
-hre() { h $(re "$@") }
-hch() { h $(ch "$@") }
+de() { [ -n "$1" ] && trash-rm "$@" || trash-empty; }
+sde() { [ -n "$1" ] && doas trash-rm "$@" || doas trash-empty; }
+u() { [ -n "$1" ] && nsxiv -q "$@" || nsxiv -qt .; }
+U() { nsxiv -qt *; }
+wi() { [ -n "$1" ] && nmcli dev wifi connect -a "$@" && nmcli con show || nmcli dev wifi list; }
+wir () { [ -n "$1" ] && nmcli radio wifi "$@" && nmcli radio wifi || nmcli radio wifi; }
+hre() { h $(re "$@"); }
+hch() { h $(ch "$@"); }
 
 rmd() {
     { [ -n "$3" ] && R -e 'rmarkdown::draft("'${1}.Rmd'", "'$2'", "'$3'")'; } ||
     { [ -n "$2" ] && R -e 'rmarkdown::draft("'${1}.Rmd'", "'$2'", "amaryaml")'; } ||
     { [ -n "$1" ] && R -e 'rmarkdown::draft("'${1}.Rmd'", "eisvogel", "amaryaml")'; } ||
-    { R -e 'rmarkdown::draft("document.Rmd", "eisvogel", "amaryaml")' }
+    { R -e 'rmarkdown::draft("document.Rmd", "eisvogel", "amaryaml")'; }
 }
 
 rmb() {
     { [ -n "$1" ] && rmd $1 book; } ||
-    { rmd index book }
+    { rmd index book; }
 }
 
 rmg() {
     { [ -n "$1" ] && rmd $1 github; } ||
-    { rmd README github }
+    { rmd README github; }
 }
 
 rms() {
     { [ -n "$1" ] && rmd $1 norbeam; } ||
-    { rmd slideshow norbeam }
+    { rmd slideshow norbeam; }
 }
 
 chk() {
-    { [ -n "$2" ] && while true ; do ; Re 'spelling::spell_check_files("'$1'", lang="'$2'")' ; sleep 10 ; done ; } ||
-    { [ -n "$1" ] && while true ; do ; Re 'spelling::spell_check_files("'$1'")' ; sleep 10 ; done }
+    { [ -n "$2" ] && while true ; do Re 'spelling::spell_check_files("'$1'", lang="'$2'")' ; sleep 10 ; done; } ||
+    { [ -n "$1" ] && while true ; do Re 'spelling::spell_check_files("'$1'")' ; sleep 10 ; done; }
 }
 
 chf() {
-    { chk $1 fr_FR }
+    { chk $1 fr_FR; }
 }
 
 Rt() {
-    { [ -n "$2" ] && Re 'formatR::tidy_source("'$1'", pipe = TRUE, indent = 2, file = "'$2'")' ; } ||
-    { [ -n "$1" ] && Re 'formatR::tidy_source("'$1'", pipe = TRUE, indent = 2, file = "'$1'")' }
+    { [ -n "$2" ] && Re 'formatR::tidy_source("'$1'", pipe = TRUE, indent = 2, file = "'$2'")'; } ||
+    { [ -n "$1" ] && Re 'formatR::tidy_source("'$1'", pipe = TRUE, indent = 2, file = "'$1'")'; }
 }
 
-bdb() { Re 'blogdown::build_site()' }
-bdn() { Re 'blogdown::build_site(build_rmd = "newfile")' }
-bdp() { Re 'blogdown::new_post("'$@'")' }
-bds() { Re 'blogdown::serve_site()' }
+bdb() { Re 'blogdown::build_site()'; }
+bdn() { Re 'blogdown::build_site(build_rmd = "newfile")'; }
+bdp() { Re 'blogdown::new_post("'$@'")'; }
+bds() { Re 'blogdown::serve_site()'; }
 
-Ri() { sRe 'install.packages("'$1'")' }
-Rr() { sRe 'remove.packages("'$1'")' }
-Rg() { sRe 'remotes::install_github("'$1'")' }
-Rs() { sRe 'install.packages("'$1.tar.gz'", type = "source", repos = NULL)' }
-tRs() { tar zcf "$1.tar.gz" "$1" && sRe 'install.packages("'$1.tar.gz'", type = "source", repos = NULL)' && /bin/rm "$1.tar.gz" }
+Ri() { sRe 'install.packages("'$1'")'; }
+Rr() { sRe 'remove.packages("'$1'")'; }
+Rg() { sRe 'remotes::install_github("'$1'")'; }
+Rs() { sRe 'install.packages("'$1.tar.gz'", type = "source", repos = NULL)'; }
+tRs() { tar zcf "$1.tar.gz" "$1" && sRe 'install.packages("'$1.tar.gz'", type = "source", repos = NULL)' && /bin/rm "$1.tar.gz"; }
 
 calendar() {
     date=$(date +%Y)
 
     parallel mpost \"\\theyear:=$date\\\; themonth:={1}\\\; input calendar\" ::: $(seq 01 12) && parallel ps2pdf calendar.{1} ::: $(seq 1 12) && pdfjam --landscape $(printf "calendar.%d.pdf " $(seq 1 12) ) && mv calendar.12-pdfjam.pdf calendar-$date.pdf && d $(printf "calendar.%d " $(seq 1 12)) $(printf "calendar.%d.pdf " $(seq 1 12))
+    rm -r ~/parallel/
+}
+
+#cf() { echo "\e[1;34m﯋ Packages (Selected): \e[0;37m`wc -l /var/lib/portage/world | cut -d ' ' -f1`\n\e[1;34m Packages (Total): \e[0;37m`ls -d     /var/db/pkg/*/* | grep -v '/var/db/pkg/virtual/' | wc -l`"; }
+
+wgp() {
+    if [ -n "$2" ]; then ansifilter "$1" | wgetpaste -l "$2"
+    else ansifilter "$1" | wgetpaste; fi
 }
