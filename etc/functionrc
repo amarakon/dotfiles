@@ -1,9 +1,10 @@
 #!/bin/sh
 
 o() {
-    { [ $# -gt 0 ] && cd "$@"; } ||
-    { [ $# -eq 0 ] && cd; }
-    realpath -s . > /tmp/terminal_pwd
+	if [ $# -gt 0 ]; then cd "$@"
+	elif [ $# -eq 0 ]; then cd
+	fi
+	[ "$(whoami)" != "root" ] && realpath -s . > /tmp/terminal_pwd
 }
 t() { o "$@" && a; }
 ta() { o "$@" && aa; }

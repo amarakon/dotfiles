@@ -60,5 +60,8 @@ autocmd BufWritePost * GitGutter
 
 "set completeopt=menu,menuone,noselect
 
+autocmd VimEnter * GitGutter
+autocmd VimEnter *.Rmd silent !setsid $READER '%:r'.pdf
+autocmd VimLeave *.Rmd !ps x | grep "zathura %:r\.pdf" | cut -d " " -f 1 | xargs kill
 autocmd Filetype gitcommit set colorcolumn=51
 autocmd Filetype diff set nospell

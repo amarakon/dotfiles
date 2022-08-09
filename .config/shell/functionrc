@@ -28,10 +28,17 @@ v() {
 }
 
 vs() {
-    file="$(ls -d /etc/portage/savedconfig/*/* | awk -F '/etc/portage/savedconfig/' '{print $2}' | grep -v '\.h$' | fzf)"
+	directory=/etc/portage/savedconfig
+	file="$(ls -d $directory/*/* | awk -F "$directory/" '{print $2}' |
+		grep -v "\.c$" | fzf)"
+	location="$directory/$file"
 
-    { [ -z "$(ls /etc/portage/savedconfig/$file.h)" ] && printf $file | xargs -I {} doas $EDITOR /etc/portage/savedconfig/"{}"; } ||
-    { printf $file.h | xargs -I {} doas $EDITOR /etc/portage/savedconfig/"{}"; }
+	[ ! -f "$location" ] && exit 1
+	if [ "$(file -b "$location" | cut -d ',' -f 1)" = "C source" ]; then
+		[ ! -f "$location.c" ] && doas ln -s "$location" "$location.c"
+		location="$location.c"
+	fi
+	doas $EDITOR "$location"
 }
 
 esl() { eselect "$@" list; }
@@ -214,8 +221,6 @@ calendar() {
     parallel mpost \"\\theyear:=$date\\\; themonth:={1}\\\; input calendar\" ::: $(seq 01 12) && parallel ps2pdf calendar.{1} ::: $(seq 1 12) && pdfjam --landscape $(printf "calendar.%d.pdf " $(seq 1 12) ) && mv calendar.12-pdfjam.pdf calendar-$date.pdf && d $(printf "calendar.%d " $(seq 1 12)) $(printf "calendar.%d.pdf " $(seq 1 12))
     rm -r ~/parallel/
 }
-
-#cf() { echo "\e[1;34m﯋ Packages (Selected): \e[0;37m`wc -l /var/lib/portage/world | cut -d ' ' -f1`\n\e[1;34m Packages (Total): \e[0;37m`ls -d     /var/db/pkg/*/* | grep -v '/var/db/pkg/virtual/' | wc -l`"; }
 
 wgp() {
     if [ -n "$2" ]; then ansifilter "$1" | wgetpaste -l "$2"
