@@ -1,6 +1,6 @@
 # Load environment settings from profile.env, which is created by
 # env-update from the files in /etc/env.d
-if [[ -e /etc/profile.env ]] ; then
+if [ -e /etc/profile.env ] ; then
 	. /etc/profile.env
 fi
 
@@ -35,10 +35,10 @@ preexec() { echo -ne '\e[6 q' ;} # Use beam shape cursor for each new prompt.
 # It is intentional in the following line to use || instead of -o.
 # This way the evaluation can be short-circuited and calling whoami is
 # avoided.
-if [[ "$EUID" = "0" ]] || [[ "$USER" = "root" ]] ; then
+if [ "$EUID" = "0" ] || [ "$USER" = "root" ]; then
 	# Check to make sure ROOTPATH is sane before we use it.
 	# https://bugs.gentoo.org/656400
-	if [[ :${ROOTPATH}: == *:/usr/sbin:* ]]; then
+	if [ :${ROOTPATH}: == *:/usr/sbin:* ]; then
 		PATH="${ROOTPATH}"
 	fi
 fi
@@ -47,11 +47,9 @@ unset ROOTPATH
 
 setopt interactive_comments
 shopts=$-
-setopt nullglob
 for sh in /etc/profile.d/*.sh ; do
-	[[ -r "${sh}" ]] && . "${sh}"
+	[ -r "${sh}" ] && . "${sh}"
 done
-unsetopt nullglob
 set -$shopts
 unset sh shopts
 
@@ -62,53 +60,20 @@ setopt extendedhistory histexpiredupsfirst histfindnodups histignoredups histign
 
 eval "$(dircolors -b)"
 
-if [[ -f /usr/share/zsh/site-functions/zsh-autosuggestions.zsh ]] ; then
-        source /usr/share/zsh/site-functions/zsh-autosuggestions.zsh
-fi
-if [[ -f /usr/share/zsh/site-functions/zsh-history-substring-search.zsh ]] ; then
-        source /usr/share/zsh/site-functions/zsh-history-substring-search.zsh
-fi
-if [[ -f /etc/grc.zsh ]] ; then
-        source /etc/grc.zsh
-fi
-if [[ -f ~/.local/share/grc/grc.zsh ]] ; then
-        source ~/.local/share/grc/grc.zsh
-fi
-if [[ -f /etc/aliasrc ]] ; then
-        source /etc/aliasrc
-fi
-if [[ -f /etc/functionrc ]] ; then
-        source /etc/functionrc
-fi
-if [[ -f ~/.aliasrc ]] ; then
-        source ~/.aliasrc
-fi
-if [[ -f ~/.config/shell/aliasrc ]] ; then
-        source ~/.config/shell/aliasrc
-fi
-if [[ -f ~/.functionrc ]] ; then
-        source ~/.functionrc
-fi
-if [[ -f ~/.config/shell/functionrc ]] ; then
-        source ~/.config/shell/functionrc
-fi
+[ -f /usr/share/zsh/site-functions/zsh-autosuggestions.plugin.zsh ] && source /usr/share/zsh/site-functions/zsh-autosuggestions.plugin.zsh
+[ -f /usr/share/zsh/site-functions/zsh-history-substring-search.plugin.zsh ] && source /usr/share/zsh/site-functions/zsh-history-substring-search.plugin.zsh
+[ -f /usr/share/grc/grc.zsh ] && source /usr/share/grc/grc.zsh
+for file in ~/.config/shell/*; do . "$file"; done
 
 autoload -Uz compinit vcs_info
 precmd() { vcs_info }
-zstyle :compinstall filename '/home/amarakon/.zshrc' 
+zstyle :compinstall filename '/home/amarakon/.zshrc'
 zstyle ':vcs_info:git:*' formats ' %F{cyan}(%F{blue}git –%F{green} -%b%F{cyan})'
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 setopt prompt_subst
-#compinit -i
-# Shamelessly borrowed from Prezto. Regenerates the completion cache approximately daily.
-_comp_files=($XDG_CACHE_HOME/zsh/zcompcache(Nm-20))
-if (( $#_comp_files )); then
-    compinit -i -C -d "$XDG_CACHE_HOME/zsh/zcompcache"
-else
-    compinit -i -d "$XDG_CACHE_HOME/zsh/zcompcache"
-fi
-unset _comp_files
+
+compinit -i
 
 zle_highlight+=(paste:none)
 

@@ -13,18 +13,41 @@ trashempty="$sound/trash-empty.wav"
 deviceadded="$sound/device-added.wav"
 servicelogout="$sound/desktop-logout.wav"
 
+o() {
+	if [ $# -gt 0 ]; then cd "$@"
+	elif [ $# -eq 0 ]; then cd
+	fi
+	[ "$(whoami)" != "root" ] && realpath -s . > /tmp/terminal_pwd
+}
+
+t() {
+	if [ $# -eq 0 -o -d "$1" ]; then o "$@" && a
+	else sesame "$@"; fi
+}
+
+ta() { o "$@" && aa; }
+tl() { o "$@" && al; }
+tla() { o "$@" && ala; }
+tt() { o "$@" && at; }
+tta() { o "$@" && ata; }
+s() { if [ -n "$1" ]; then bd "$@"; else cd ..; fi; }
+r() { s "$@" && a; }
+m() { if [ -n "$1" ]; then doas "$@"; else su; fi; }
+
 mdp() { setsid grip -b --quiet "$@" &>/dev/null; }
 
-yc() {
-    name="$(printf $1 | cut -d '/' -f 4)"
-    repo="$(printf $1 | cut -d '/' -f 5)"
+hc() {
+	name="$(printf $1 | cut -d '/' -f 4)"
+	repo="$(printf $1 | cut -d '/' -f 5)"
 
-    mkdir $name; cd $name && git clone $1 && cd $repo
+	[ ! -d $name ] && mkdir $name
+	cd $name && h clone $1 && cd $repo
 }
 
 v() {
-    list() { ls --group-directories-first -d "$@"; }
-    (cd ~/.config && echo "$(list */* ; list */.*)" | fzf | xargs -I {} $EDITOR "{}")
+	for i in $(find ~/.config -print); do
+		test -f "$i" && printf '%s\n' "$i"
+	done | fzf | xargs -I {} sesame "{}"
 }
 
 vs() {
@@ -165,8 +188,8 @@ u() { [ -n "$1" ] && nsxiv -q "$@" || nsxiv -qt .; }
 U() { nsxiv -qt *; }
 wi() { [ -n "$1" ] && nmcli dev wifi connect -a "$@" && nmcli con show || nmcli dev wifi list; }
 wir () { [ -n "$1" ] && nmcli radio wifi "$@" && nmcli radio wifi || nmcli radio wifi; }
-hre() { h $(re "$@"); }
-hch() { h $(ch "$@"); }
+nre() { n $(re "$@"); }
+nch() { n $(ch "$@"); }
 
 rmd() {
     { [ -n "$3" ] && R -e 'rmarkdown::draft("'${1}.Rmd'", "'$2'", "'$3'")'; } ||
@@ -216,13 +239,13 @@ Rs() { sRe 'install.packages("'$1.tar.gz'", type = "source", repos = NULL)'; }
 tRs() { tar zcf "$1.tar.gz" "$1" && sRe 'install.packages("'$1.tar.gz'", type = "source", repos = NULL)' && /bin/rm "$1.tar.gz"; }
 
 calendar() {
-    date=$(date +%Y)
+	date=$(date +%Y)
 
-    parallel mpost \"\\theyear:=$date\\\; themonth:={1}\\\; input calendar\" ::: $(seq 01 12) && parallel ps2pdf calendar.{1} ::: $(seq 1 12) && pdfjam --landscape $(printf "calendar.%d.pdf " $(seq 1 12) ) && mv calendar.12-pdfjam.pdf calendar-$date.pdf && d $(printf "calendar.%d " $(seq 1 12)) $(printf "calendar.%d.pdf " $(seq 1 12))
-    rm -r ~/parallel/
+	parallel mpost \"\\theyear:=$date\\\; themonth:={1}\\\; input calendar\" ::: $(seq 01 12) && parallel ps2pdf calendar.{1} ::: $(seq 1 12) && pdfjam --landscape $(printf "calendar.%d.pdf " $(seq 1 12) ) && mv calendar.12-pdfjam.pdf calendar-$date.pdf && d $(printf "calendar.%d " $(seq 1 12)) $(printf "calendar.%d.pdf " $(seq 1 12))
+	rm -r ~/parallel/
 }
 
 wgp() {
-    if [ -n "$2" ]; then ansifilter "$1" | wgetpaste -l "$2"
-    else ansifilter "$1" | wgetpaste; fi
+	if [ -n "$2" ]; then ansifilter "$1" | wgetpaste -l "$2"
+	else ansifilter "$1" | wgetpaste; fi
 }

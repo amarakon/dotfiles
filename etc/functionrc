@@ -6,7 +6,12 @@ o() {
 	fi
 	[ "$(whoami)" != "root" ] && realpath -s . > /tmp/terminal_pwd
 }
-t() { o "$@" && a; }
+
+t() {
+	if [ $# -eq 0 -o -d "$1" ]; then o "$@" && a
+	else sesame "$@"; fi
+}
+
 ta() { o "$@" && aa; }
 tl() { o "$@" && al; }
 tla() { o "$@" && ala; }

@@ -4,33 +4,25 @@ source ~/.config/zsh/plugin.zsh
 # ~/ Clean-up:
 export HISTFILE=~/.cache/zsh/history
 
-[ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && startx "$XDG_CONFIG_HOME/X11/xinitrc" &>/dev/null
+[ -z "$DISPLAY" -a "$XDG_VTNR" -eq 1 ] && startx "$XDG_CONFIG_HOME/X11/xinitrc"
 
-. /usr/share/zsh/site-functions/_fzf
-. /usr/share/fzf/key-bindings.zsh
+source /usr/share/zsh/site-functions/_fzf
+source /usr/share/fzf/key-bindings.zsh
 
 # Keybindings
-cl() { clear; zle reset-prompt }
-za() { printf '\n' && a; zle reset-prompt }
-zal() { printf '\n' && al; zle reset-prompt }
-zat() { printf '\n' && at; zle reset-prompt }
-cla() { clear && a; zle reset-prompt }
-clal() { clear && al; zle reset-prompt }
-clat() { clear && at; zle reset-prompt }
-zdman() { printf '\n' ; apropos . | dmenu -l 10 | cut -d ' ' -f1 | xargs -I {} man "{}"; zle reset-prompt }
+cl() { clear; zle reset-prompt; }
+za() { printf '\n' && a; zle reset-prompt; }
+zal() { printf '\n' && al; zle reset-prompt; }
+zat() { printf '\n' && at; zle reset-prompt; }
+cla() { clear && a; zle reset-prompt; }
+clal() { clear && al; zle reset-prompt; }
+clat() { clear && at; zle reset-prompt; }
 term() { setsid $TERMINAL --working-directory="$(pwd)" &> /dev/null; }
 zbd() { bd && print && a ; zle reset-prompt; }
 
-zle -N cl
-zle -N za
-zle -N zal
-zle -N zat
-zle -N cla
-zle -N clal
-zle -N clat
-zle -N zdman
-zle -N term
-zle -N zbd
+for i in $(print "cl\nza\nzal\nzat\ncla\nclal\nclat\nterm\nzbd"); do
+	zle -N $i
+done
 
 zmodload zsh/complist
 bindkey -M menuselect '\t' accept-and-infer-next-history
@@ -138,4 +130,11 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 #zstyle ':completion:*' list-colors 'ma=48;2;76;86;106'
 
 ## Initialize the completion system.
-compinit -i
+# Shamelessly borrowed from Prezto. Regenerates the completion cache approximately daily.
+_comp_files=($XDG_CACHE_HOME/zsh/zcompcache(Nm-20))
+if (( $#_comp_files )); then
+    compinit -i -C -d "$XDG_CACHE_HOME/zsh/zcompcache"
+else
+    compinit -i -d "$XDG_CACHE_HOME/zsh/zcompcache"
+fi
+unset _comp_files

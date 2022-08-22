@@ -3,19 +3,24 @@
 directory=/tmp/dman
 cleanup() { rm -rf $directory; }
 trap cleanup EXIT
-
+c>a
 [ ! -d "$directory" ] && mkdir $directory
 title="$(apropos . | dmenu -l 10 | cut -d ' ' -f 1-2 | tr -d ' ')"
-[ "$title" = "" ] && exit 1
+[ "$title" = "" ] && exit 0
 
 IFS="
 "
-files="$(for i in $title; do
-	file="$directory/$i – $(printf "$i" | xargs -r man | head -1 |
-		tr -s ' ' | cut -d ' ' -f 2- | rev | cut -d ' ' -f 2- | rev)"
 
-	printf "$i" | xargs -r man -Tpdf > "$file"
+files="$(for i in $title; do
+	file="$directory/$i – $(printf '%s' "$i" | xargs -r man | head -1 |
+		tr -s ' ' | cut -d ' ' -f 2- | rev | cut -d ' ' -f 2- | rev |
+		# Straight apostrophes with non-whitespace characters surrounding them:
+		# https://unix.stackexchange.com/a/713841/513913
+		sed -e :1 -e "s/\([^[:space:]]\)'\([^[:space:]]\)/\1’\2/g" -e t1 |
+		sed "s/'/‘/ ; s/'/’/")"
+
+	printf '%s' "$i" | xargs -r man -Tpdf > "$file"
 	[ -s "$file" ] && printf '%s\n' "$file"
 done)"
 
-printf "$files" | sed -e "s|'|'\\\\''|g ; s|\(.*\)|'\1'|" | xargs $READER
+printf '%s' "$files" | sed -e "s|'|'\\\\''|g ; s|\(.*\)|'\1'|" | xargs $READER
