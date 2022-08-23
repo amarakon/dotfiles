@@ -66,8 +66,8 @@ nmap <leader><backspace> <cmd>delmarks a-zA-Z0-9<return>
 nmap <leader>s <cmd>wshada!<return>
 nmap <tab> <cmd>tabnext<return>
 nmap <s-tab> <cmd>tabprevious<return>
-nmap <leader>n ;$tabedit<space>
-nmap <leader>N ;Tabclose<space>
+nmap <leader>n :$tabedit<space>
+nmap <leader>N :Tabclose<space>
 
 " Go to tab by number
 for i in range(9)
@@ -80,7 +80,7 @@ nmap <leader>q <cmd>x<return>
 nmap <leader>Q <cmd>q!<return>
 nmap <leader>t <cmd>up<return>
 nmap <leader>T <cmd>w!<return>
-map <leader><tab> ;Tabularize<space>
+map <leader><tab> :Tabularize<space>
 nmap <leader>f <cmd>Filetypes<return>
 nmap <leader>F <cmd>Files<return>
 nmap <leader>g <cmd>Git<return>
@@ -90,7 +90,7 @@ nmap <leader>a <cmd>Git add %<return>
 nmap <leader>A <cmd>Git add -A<return>
 nmap <leader>d <cmd>Git diff<return>
 nmap <leader>D <cmd>!diff<space>
-nmap <leader>r ;Move<space>
+nmap <leader>r :Move<space>
 nmap <leader>p <cmd>ToggleAlternate<return>
 nmap <leader>z <cmd>!'./%:r'<return>
 
@@ -106,8 +106,8 @@ xnoremap <Tab> <Plug>(snippy-cut-text)
 map <bar> <cmd>Tabularize /│<return>
 nmap U <cmd>GitGutterUndoHunk<return>
 nmap J <cmd>GitGutterPreviewHunk<return>
-noremap ; :
-nmap : <cmd>Commands<return>
+"noremap ; :
+nmap ; <cmd>Commands<return>
 nmap H <cmd>Help<return>
 
 nmap <silent> <C-s> <Plug>(ale_previous_wrap)
@@ -118,7 +118,7 @@ highlight aleerrorsign gui=bold
 
 imap <c-l> <c-x><c-l>
 
-nmap <silent> <return> ;noh<return>
+nmap <silent> <return> :noh<return>
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
